@@ -10,9 +10,9 @@ const CodeEditor = ({ code, setCode }) => {
 
     useEffect(() => {
         if (width > 768) {
-            setEditorHeight("60vh");
+            setEditorHeight("58vh");
         } else {
-            setEditorHeight("60vh");
+            setEditorHeight("58vh");
         }
     }, [width]);
     
@@ -20,7 +20,8 @@ const CodeEditor = ({ code, setCode }) => {
     return (
         <Editor
             height={editorHeight}
-            width={`70%`}
+            width={`100%`}
+            
             language="python"
             value={code}
             theme="vs-dark"

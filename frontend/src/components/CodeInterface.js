@@ -4,13 +4,15 @@ import Agent from './Agent'
 import { boilerCodes } from '../boilerCodes';
 import { Container, Button } from '@mui/material';
 import { makeStyles } from '@mui/styles';
+import zIndex from '@mui/material/styles/zIndex';
 
 
 
 const useStyles = makeStyles((theme) => ({
     container: {
         height: '100vh !important',
-        minWidth: '100% !important',
+        minWidth: '76% !important',
+        width: '76% !important',
         flexDirection: 'column !important',
         display: 'flex !important',
         alignItems: 'center !important',

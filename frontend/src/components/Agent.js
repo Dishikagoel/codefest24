@@ -1,42 +1,57 @@
-import React, { useState, useRef, useEffect } from 'react';
-import ChatbotPopover from './ChatbotPopover';
+import React, { useState } from 'react';
+import { styled } from '@mui/material/styles';
+import List from '@mui/material/List';
+import ListItem from '@mui/material/ListItem';
+import ListItemText from '@mui/material/ListItemText';
+import Avatar from '@mui/material/Avatar';
+
+const StyledAgent = styled('div')({
+  position: 'fixed',
+  right: 0,
+  bottom: 0,
+  width: '24%',
+  height: '100vh',
+  backgroundColor: '#f0f0f0',
+  padding: '20px',
+  boxSizing: 'border-box',
+  display: 'flex',
+  flexDirection: 'column',
+  alignItems: 'center',
+  zIndex: 1000
+});
+
+const MessagesList = styled(List)({
+  width: '100%',
+  overflow: 'auto',
+  flexGrow: 1,
+  marginTop: 10,
+});
+
+const StyledAvatar = styled(Avatar)({
+  position: 'absolute',
+  bottom: 20,
+  right: 20,
+  backgroundColor: '#1976d2', // Example blue background
+  cursor: 'pointer',
+});
 
 function Agent() {
-  const [messageHistory, setMessageHistory] = useState([
+  const [messages, setMessages] = useState([
     'Hello, how can I help you today?',
-    // ... more initial messages if needed
+    'Feel free to ask any questions!',
   ]);
-  // We use useRef to create a reference to the avatar element which the popover will anchor to
-  const avatarRef = useRef(null);
-
-  // Assume popover is always open
-  const open = true;
 
   return (
-    <div style={{ position: 'fixed', right: 0, bottom: 0, padding: 16 }}>
-      {/* The popover is always visible because `open` is set to `true` */}
-      <ChatbotPopover anchorEl={avatarRef.current} open={open} messageHistory={messageHistory} />
-      
-      {/* Reference to avatar element */}
-      <div
-        ref={avatarRef}
-        style={{
-          width: 50,
-          height: 50,
-          borderRadius: '50%',
-          backgroundColor: 'black',
-          position: 'absolute',
-          right: 10,
-          bottom: 10,
-        }}
-      >
-        <img
-          src="https://via.placeholder.com/50"
-          alt="Chatbot avatar"
-          style={{ width: '100%', height: '100%', borderRadius: '50%' }}
-        />
-      </div>
-    </div>
+    <StyledAgent>
+      <MessagesList>
+        {messages.map((msg, index) => (
+          <ListItem key={index}>
+            <ListItemText primary={msg} />
+          </ListItem>
+        ))}
+      </MessagesList>
+      <StyledAvatar src="../../public/images/14360.png"></StyledAvatar>
+    </StyledAgent>
   );
 }
 
