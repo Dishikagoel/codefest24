@@ -13,6 +13,7 @@ function App() {
                     {/* <Route path="/other-path" element={<OtherComponent />} /> */}
                     <Route path="/agent" element={<CodeInterface/>} />
                     {/* Redirect to the question page by default */}
+                    <Route path="/" element={<QuestionPage />} />
                     <Route path="/question" element={<QuestionPage />} />
                 </Routes>
             </div>
