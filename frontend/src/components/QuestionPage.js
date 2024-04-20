@@ -5,6 +5,7 @@ import Typography from '@mui/material/Typography';
 import Grid from '@mui/material/Grid';
 import { styled } from '@mui/material/styles';
 import FaceIcon from '@mui/icons-material/Face';
+import { useNavigate } from "react-router-dom";
 
 const OptionButton = styled(Button)({
     height: 50,
@@ -67,11 +68,15 @@ const initialOptions = {
 };
 
 const QuestionPage = () => {
+    const navigate = useNavigate();
     const [selectedOptions, setSelectedOptions] = useState([]);
     const [options, setOptions] = useState(initialOptions);
 
     const handleOptionClick = (option) => {
-        if (!options[Object.keys(options)[0]][option]) return;
+        if (!options[Object.keys(options)[0]][option]) {
+            // navigate to /about
+            navigate("/agent");
+        }
         const nextOptions = options[Object.keys(options)[0]][option];
         const newSelectedOptions = [...selectedOptions, [Object.keys(options)[0], option]];
 
@@ -115,6 +120,7 @@ const QuestionPage = () => {
                     Back
                 </Button>
             )}
+            {Object.keys(options).length>0?
             <Grid container spacing={2} direction="column">
                 {Object.keys(options[Object.keys(options)[0]]).map((option, index) => (
                     <Grid item key={index}>
@@ -124,6 +130,8 @@ const QuestionPage = () => {
                     </Grid>
                 ))}
             </Grid>
+
+            : navigate("/agent")}
         </Container>
     );
 };
