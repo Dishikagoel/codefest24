@@ -1,7 +1,6 @@
 #!/bin/bash
 
-out=$(timeout --foreground 10 python3 test.py)
-#sleep 10
+out=$(timeout --foreground 30 python3 test.py)
 status=$?
 
 if [ $status -eq 124 ]; then
