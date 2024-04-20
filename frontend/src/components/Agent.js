@@ -39,6 +39,8 @@ function Agent() {
   const [messages, setMessages] = useState([
     'Hello, how can I help you today?',
     'Feel free to ask any questions!',
+    'Feel free to ask any questions!',
+    'Feel free to ask any questions!',
   ]);
 
   return (

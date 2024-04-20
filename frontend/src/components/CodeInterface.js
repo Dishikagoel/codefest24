@@ -24,18 +24,17 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 async function sendToAPI(code) {
-    console.log(code);
     // send code to API
     try {
-        const response = await fetch('https://myapi.com/endpoint', {
+        const response = await fetch('http://127.0.0.1:3002/run', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
                 // Authorization: 'Bearer your-token-here' // if your API requires an authorization header
             },
-            body: {
-                code: code,
-            },
+            body: JSON.stringify({
+                "code": code,
+            }),
         });
 
         if (!response.ok) {
