@@ -18,7 +18,7 @@ def check_python_code(code):
         # Check if the code compiles
         compile(code, '<string>', 'exec')
     except SyntaxError as e:
-        return "Syntax error in the code"
+        return "SyntaxError"
 
     # Set a timeout and execute the code
     try:
