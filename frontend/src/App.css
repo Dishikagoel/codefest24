@@ -1,10 +1,5 @@
 .App {
   text-align: center;
-  background-color: orange;
-}
-
-body {
-  background-color: white;
 }
 
 .App-logo {
@@ -12,15 +7,11 @@ body {
   pointer-events: none;
 }
 
-.text {
-  color: white;
+@media (prefers-reduced-motion: no-preference) {
+  .App-logo {
+    animation: App-logo-spin infinite 20s linear;
+  }
 }
-
-/*@media (prefers-reduced-motion: no-preference) {*/
-/*  .App-logo {*/
-/*    animation: App-logo-spin infinite 20s linear;*/
-/*  }*/
-/*}*/
 
 .App-header {
   background-color: #282c34;

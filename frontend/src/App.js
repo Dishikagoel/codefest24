@@ -7,12 +7,12 @@ function App() {
     return (
         <Router>
             <div>
+                <h1>Hi</h1>
                 <Routes>
 
                     {/* You can define more routes as needed */}
                     {/* <Route path="/other-path" element={<OtherComponent />} /> */}
                     {/* <Route path="/agent" element={<Agent />} /> */}
-
                     {/* Redirect to the question page by default */}
                     <Route path="/question" element={<QuestionPage />} />
                 </Routes>
