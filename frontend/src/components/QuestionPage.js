@@ -14,7 +14,8 @@ const OptionButton = styled(Button)({
 });
 
 // make some question understand how the child learns
-const initialOptions = [['How do you like classrooms?', ['Friends/family', 'Alone', 'With strangers', 'Online', 'Other']], ['How do you like to learn?', ['Visual', 'Auditory', 'Kinesthetic', 'Reading/writing']], ['What is your favorite subject?', ['Math', 'Science', 'History', 'English', 'Art', 'Other']], ['What is your favorite hobby?', ['Sports', 'Music', 'Reading', 'Gaming', 'Cooking', 'Other']], 'How do you feel about school?', ['Love it', 'Hate it', 'It\'s okay', 'I don\'t go to school']];
+
+const initialOptions = [['How do you like classrooms?', ['Friends/family', 'Alone', 'With strangers', 'Online', 'Other']], ['How do you like to learn?', ['Visual', 'Auditory', 'Kinesthetic', 'Reading/writing']], ['What is your favorite subject?', ['Math', 'Science', 'History', 'English', 'Art', 'Other']], ['What is your favorite hobby?', ['Sports', 'Music', 'Reading', 'Gaming', 'Cooking', 'Other']], ['How do you feel about school?', ['Love it', 'Hate it', 'It\'s okay', 'I don\'t go to school']]];
 
 const QuestionPage = () => {
     const navigate = useNavigate();
@@ -23,12 +24,15 @@ const QuestionPage = () => {
 
     const handleOptionClick = (option) => {
         if (options == initialOptions.length-1) {
-            // navigate to /about
             navigate("/agent");
         }
         const newSelectedOptions = [...selectedOptions, option];
         setSelectedOptions(newSelectedOptions);
-        setOptions(options+1);
+        setOptions(options + 1);
+    };
+
+    const goBackToPreviousQuestion = () => {
+        setOptions(options - 1);
     };
 
     const goBackToPreviousQuestion = () => {
