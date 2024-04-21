@@ -51,7 +51,9 @@ def run():
 @app.route("/llm_api", methods=["POST"])
 def llm_api():
     content = f"""Ok, so here is the question: {request.get_json()["question"]} and here is the answer: {request.get_json()["answer"]}. Given this context, please check if this answer is correct based on the question. If it is not, please provide the correct answer. You have to give the output in the format <Correct/Incorrect> <Correct Answer/Positive Feedback>. For example in: question: print hello world, answer: print("hello world"), the output should be: Correct Good Job!. If the answer is incorrect, the output should be: Incorrect The correct answer is print("hello world")."""
-    response = OpenAI(api_key=os.getenv('OPENAI_API'), message=[{"role": "system", "content": "You are a helpful assistant."}, {"role": "user", "content": content}])
+    # print("API Ky", os.getenv('OPENAI_API'))
+    client = OpenAI(api_key=os.getenv('OPENAI_API'))
+    response = client.chat.completions.create(model="ft:gpt-3.5-turbo-0125:personal::9GCHGPWm", messages=[{"role": "system", "content": "You are a helpful assistant."}, {"role": "user", "content": content}])
     msg = response.choices[0].message.content
     return {"response": msg.split(" ")[0], "feedback": " ".join(msg.split(" ")[1:])}
 
