@@ -1,10 +1,14 @@
-from flask import Flask, request
+import json
+
+from flask import Flask, request, jsonify
 from flask_cors import CORS
 import multiprocessing
 import timeout_decorator
 from openai import OpenAI
 from dotenv import load_dotenv
 import os
+from io import StringIO
+from contextlib import redirect_stdout
 
 # Load the environment variables from the .env file
 load_dotenv()
@@ -15,16 +19,22 @@ CORS(app)
 
 def execute_code(code):
     try:
-        exec(code, {"__name__": "__main__"})
+        f = StringIO()
+        with redirect_stdout(f):
+            exec(code, {"__name__": "__main__"})
+        return f.getvalue()
     except Exception as e:
         return str(e)
 
 def check_python_code(code):
+    global output
     try:
         # Check if the code compiles
         compile(code, '<string>', 'exec')
     except SyntaxError as e:
-        return "SyntaxError"
+        print("Syntax Error")
+        print(str(e))
+        return {"Status":"SyntaxError", "Message":str(e)}
 
     # Set a timeout and execute the code
     try:
@@ -34,19 +44,22 @@ def check_python_code(code):
         if process.is_alive():
             process.terminate()
             process.join()
-            return "Infinite"
+            return {"Status": "Infinite", "Message": "Compile Timeout Error, please check for infinite loops"}
     except timeout_decorator.timeout_decorator.TimeoutError:
-        return "Infinite"
+        return {"Status": "Infinite", "Message": "Compile Timeout Error, please check for infinite loops"}
     except Exception as e:
-        return f"Error"
-
-    return "Success"
+        return {"Status":"SyntaxError", "Message":e}
+    return {"Status":"Success","Message" : execute_code(code)}
 
 
 @app.route("/run", methods=["POST"])
 def run():
     content = f"""{request.get_json()["code"]}"""
-    return {"response": check_python_code(content)}
+    print(content)
+    res = check_python_code(content)
+    print(f"Res")
+    print(res)
+    return res
 
 @app.route("/llm_api", methods=["POST"])
 def llm_api():
