@@ -6,8 +6,6 @@ import { Container, Button } from '@mui/material';
 import { makeStyles } from '@mui/styles';
 import zIndex from '@mui/material/styles/zIndex';
 
-
-
 const useStyles = makeStyles((theme) => ({
     container: {
         height: '100vh !important',
