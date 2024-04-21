@@ -32,10 +32,6 @@ const QuestionPage = () => {
     };
 
     const goBackToPreviousQuestion = () => {
-        setOptions(options - 1);
-    };
-
-    const goBackToPreviousQuestion = () => {
         setOptions(options-1);
         setSelectedOptions(selectedOptions.slice(0, -1));
     };
