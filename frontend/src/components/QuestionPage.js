@@ -14,6 +14,7 @@ const OptionButton = styled(Button)({
 });
 
 // make some question understand how the child learns
+
 const initialOptions = [['How do you like classrooms?', ['Friends/family', 'Alone', 'With strangers', 'Online', 'Other']], ['How do you like to learn?', ['Visual', 'Auditory', 'Kinesthetic', 'Reading/writing']], ['What is your favorite subject?', ['Math', 'Science', 'History', 'English', 'Art', 'Other']], ['What is your favorite hobby?', ['Sports', 'Music', 'Reading', 'Gaming', 'Cooking', 'Other']], ['How do you feel about school?', ['Love it', 'Hate it', 'It\'s okay', 'I don\'t go to school']]];
 
 const QuestionPage = () => {
@@ -22,9 +23,7 @@ const QuestionPage = () => {
     const [options, setOptions] = useState(0);
 
     const handleOptionClick = (option) => {
-        console.log(options);
-        if (options == initialOptions.length - 1) {
-            // navigate to /agent
+        if (options == initialOptions.length-1) {
             navigate("/agent");
         }
         const newSelectedOptions = [...selectedOptions, option];
@@ -34,35 +33,36 @@ const QuestionPage = () => {
 
     const goBackToPreviousQuestion = () => {
         setOptions(options - 1);
+    };
+
+    const goBackToPreviousQuestion = () => {
+        setOptions(options-1);
         setSelectedOptions(selectedOptions.slice(0, -1));
     };
 
 
     return (
-        options == initialOptions.length - 1 ? navigate("/agent") : (
-            <Container style={{ backgroundColor: 'rgb(18 20 45)', height: '100vh' }} maxWidth={false}>
-
-                <Typography variant="h4" gutterBottom>
-                    {initialOptions[options][0]}
-                </Typography>
-                {selectedOptions.length > 0 && (
-                    <Button variant="outlined" fullWidth onClick={goBackToPreviousQuestion}>
-                        Back
-                    </Button>
-                )}
-                {
-                    <Grid container spacing={2} direction="column">
-                        {initialOptions[options][1].map((option, index) => (
-                            <Grid item key={index}>
-                                <OptionButton variant="outlined" fullWidth startIcon={<FaceIcon />} onClick={() => handleOptionClick(option)}>
-                                    {option}
-                                </OptionButton>
-                            </Grid>
-                        ))}
+        <Container style={{backgroundColor: 'rgb(18 20 45)', width: '100% !important', height: '100vh !important'}} maxWidth={false}>
+            
+            <Typography variant="h4" gutterBottom>
+                {initialOptions[options][0]}
+            </Typography>
+            {selectedOptions.length > 0 && (
+                <Button variant="outlined" fullWidth onClick={goBackToPreviousQuestion}>
+                    Back
+                </Button>
+            )}
+            {
+            <Grid container spacing={2} direction="column">
+                {initialOptions[options][1].map((option, index) => (
+                    <Grid item key={index}>
+                        <OptionButton variant="outlined" fullWidth startIcon={<FaceIcon />} onClick={() => handleOptionClick(option)}>
+                            {option}
+                        </OptionButton>
                     </Grid>
-                }
-            </Container>
-        )
+                ))}
+            </Grid>}
+        </Container>
     );
 };
 
