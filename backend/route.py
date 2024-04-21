@@ -73,7 +73,8 @@ def llm_api():
 @app.route("/llm_chatbot", methods=["POST"])
 def llm_chatbot_msg():
     client = OpenAI(api_key=os.getenv('OPENAI_API'))
-    response = client.chat.completions.create(model="ft:gpt-3.5-turbo-0125:personal::9GCHGPWm", messages=[{"role": "system", "content": "You are a helpful assistant."}, {"role": "user", "content": request.get_json()["message"]}])
+    print(request.get_json())
+    response = client.chat.completions.create(model="ft:gpt-3.5-turbo-0125:personal::9GCHGPWm", messages=request.get_json())
     msg = response.choices[0].message.content
     return {"feedback": msg}
 
