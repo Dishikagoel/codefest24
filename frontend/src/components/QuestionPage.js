@@ -38,7 +38,18 @@ const QuestionPage = () => {
 
 
     return (
-        <Container style={{backgroundColor: 'rgb(18 20 45)', width: '100% !important', height: '100vh !important'}} maxWidth={false}>
+        <> {/* Wrap content in a React fragment */}
+        <style jsx global> {/* Apply global styles */}
+          {`
+            body { /* Set background color for the entire page */
+              background-color: #222;
+              color: #fff;
+            }
+          `}
+        </style>
+
+        <Container style={{backgroundColor: '#222', color: '#fff'}} maxWidth={false}>
+
             
             <Typography variant="h4" gutterBottom>
                 {initialOptions[options][0]}
@@ -59,6 +70,7 @@ const QuestionPage = () => {
                 ))}
             </Grid>}
         </Container>
+     </> // Add closing JSX fragment tag here
     );
 };
 
